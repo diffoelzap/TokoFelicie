@@ -41,6 +41,6 @@
 
 			</td>
 		</tr>
-		<?php } ?>
+		<?php $no++;} ?>
 	</tbody>
 </table>
