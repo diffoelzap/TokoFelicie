@@ -18,9 +18,8 @@
 		<tr>
 			<th>NO</th>
 			<th>NAMA</th>
-			<th>EMAIL</th>
-			<th>USERNAME</th>
-			<th>LEVEL</th>
+			<th>SLUG</th>
+			<th>URUTAN</th>
 			<th>ACTION</th>
 		</tr>
 	</thead>
@@ -28,10 +27,9 @@
 		<?php $no=1; foreach ($kategori as  $kategori) { ?>
 		<tr>
 			<td><?php echo $no ?></td>
-			<td><?php echo $kategori->nama ?></td>
-			<td><?php echo $kategori->email ?></td>
-			<td><?php echo $kategori->kategoriname ?></td>
-			<td><?php echo $kategori->akses_level ?></td>
+			<td><?php echo $kategori->nama_kategori ?></td>
+			<td><?php echo $kategori->slug_kategori ?></td>
+			<td><?php echo $kategori->urutan ?></td>
 			<td>
 				<a href="<?php echo base_url('admin/kategori/edit/'.$kategori->id_kategori) ?>" class=
 					"btn btn-warning btn-xs"><i class="fa fa-edit"></i> UBAH</a>
