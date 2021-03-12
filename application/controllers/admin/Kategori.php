@@ -94,7 +94,7 @@ class Kategori extends CI_Controller {
 
 	//Delete Data
 	public function delete($id_kategori)
-	{
+	{	
 		$data = array('id_kategori' => $id_kategori);
 		$this->kategori_model->delete($data);
 		$this->session->set_flashdata('sukses', 'Data telah dihapus');

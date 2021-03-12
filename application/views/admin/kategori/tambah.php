@@ -19,7 +19,7 @@ echo form_open(base_url('admin/kategori/tambah'),' class="form-horizontal"');
   <label class="col-md-2 control-label">Urutan</label>
 
   <div class="col-md-5">
-    <input type="email" name="urutan" class="form-control" placeholder="Urutan" value=
+    <input type="number" name="urutan" class="form-control" placeholder="Urutan" value=
     "<?php echo set_value('urutan') ?>" required>
   </div>
 </div>
