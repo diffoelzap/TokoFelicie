@@ -31,21 +31,9 @@ class Kategori extends CI_Controller {
 		$valid = $this->form_validation;
 
 
-		$valid->set_rules('nama','Nama pengguna' ,'required',
-				array('required' => '%s harus diisi'));
-
-		$valid->set_rules('email','Email' ,'required|valid_email',
-			    array('required' => '%s harus diisi',
-			    	  'valid_email' => '%s tidak valid'));
-
-		$valid->set_rules('kategoriname','Kategoriname' ,'required|min_length[6]|max_length[32]|is_unique[kategoris.kategoriname]',
-			    array('required' => '%s harus diisi' , 
-			    	  'min_length' => '%s minimal 6 karakter' , 
-			    	  'max_length' => '%s maksimal 32 karakter' , 
-			    	  'is_unique' => 'sudah ada. Buat kategoriname baru.'));
-
-		$valid->set_rules('password','Password' ,'required',
-			    array('required' => '%s harus diisi'));
+		$valid->set_rules('nama_kategori','Nama kategori' ,'required|is_unique[kategori.nama_kategori]',
+				array('required'  => '%s harus diisi',
+					  'is_unique' => '%s sudah ada. Buat Kategori baru!'));
 
 		if($valid->run()===FALSE){
 
@@ -56,11 +44,12 @@ class Kategori extends CI_Controller {
 		//Masuk database
 		}else{
 			$i = $this->input;
-			$data = array('nama' => $i->post('nama'),
-						  'email' => $i->post('email'),
-						  'kategoriname' => $i->post('kategoriname'),
-						  'password' => SHA1($i->post('password')),
-						  'akses_level' => $i->post('akses_level')
+
+			$slug_kategori = url_title($this->input->post('nama_kategori'), 'dash', TRUE);
+
+			$data = array('slug_kategori' => $slug_kategori,
+				          'nama_kategori' => $i->post('nama_kategori'),
+						  'urutan'   => $i->post('urutan')
 						);
 			$this->kategori_model->tambah($data);
 			$this->session->set_flashdata('sukses', 'Data telah ditambah');
@@ -77,15 +66,8 @@ class Kategori extends CI_Controller {
 		$valid = $this->form_validation;
 
 
-		$valid->set_rules('nama','Nama pengguna' ,'required',
+		$valid->set_rules('nama_kategori','Nama kategori' ,'required',
 				array('required' => '%s harus diisi'));
-
-		$valid->set_rules('email','Email' ,'required|valid_email',
-			    array('required' => '%s harus diisi',
-			    	  'valid_email' => '%s tidak valid'));
-
-		$valid->set_rules('password','Password' ,'required',
-			    array('required' => '%s harus diisi'));
 
 		if($valid->run()===FALSE){
 
@@ -97,12 +79,11 @@ class Kategori extends CI_Controller {
 		//Masuk database
 		}else{
 			$i = $this->input;
-			$data = array('id_kategori' => $id_kategori,
-				 		  'nama' => $i->post('nama'),
-						  'email' => $i->post('email'),
-						  'kategoriname' => $i->post('kategoriname'),
-						  'password' => SHA1($i->post('password')),
-						  'akses_level' => $i->post('akses_level')
+			$slug_kategori = url_title($this->input->post('nama_kategori'), 'dash', TRUE);
+			$data = array('id_kategori'   => $id_kategori,
+				 		  'slug_kategori' => $slug_kategori,
+						  'nama_kategori' => $i->post('nama_kategori'),
+						  'urutan'        => $i->post('urutan'),
 						);
 			$this->kategori_model->edit($data);
 			$this->session->set_flashdata('sukses', 'Data telah diedit');
